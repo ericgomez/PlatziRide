@@ -23,11 +23,35 @@ export class RideFormPage implements OnInit {
   ngOnInit() {
     this.id = this.activateRoute.snapshot.paramMap.get('id');
     this.editing = (this.id != 'new');
+
+    if (this.editing) {
+      this.rideService.getById(this.id).subscribe(
+        (data: Ride) => {
+          this.ride = data;
+          console.log(data);
+        }, 
+        (error) => {
+          alert('No se puedo obtener la rodada...');
+          console.log(error);
+        }
+      )
+    }
   }
 
   save() {
     if (this.editing) {
       // Metodo para editar la rura
+      this.rideService.update(this.ride).subscribe(
+        (data) => {
+          alert('Se actualizó la rodada correctamente');
+          this.navCtrl.pop();
+          console.log(data);
+        }, 
+        (error) => {
+          alert('No se pudo actualizar la rodada...');
+          console.log(error);
+        }
+      )
     } else {
       //Metodo para crear una nueva ruta
       this.rideService.create(this.ride).subscribe(
@@ -37,7 +61,7 @@ export class RideFormPage implements OnInit {
           console.log(data);
         }, 
         (error) => {
-          alert('No se puedo crear la rodada...');
+          alert('No se pudo crear la rodada...');
           console.log(error);
         }
       )
