@@ -1,27 +1,16 @@
 <ion-header>
   <ion-toolbar color="dark">
-
-    <ion-buttons slot="start" color="dark">
-      <ion-button (click)="getRides()">
-        <ion-icon slot="icon-only" name="refresh"></ion-icon>
-      </ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-
-    <ion-title>Rodadas</ion-title>
-
-    <ion-buttons slot="end" color="dark">
-      <ion-button routerLink="/ride-form/new">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    
+    <ion-title>Ride</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark">
-  <ion-card *ngFor="let ride of rides | async">
-    <img routerLink="/ride/{{ride.id}}" src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
-    <ion-card-header routerLink="/ride/{{ride.id}}">
+  <ion-card *ngIf="ride">
+    <img src="https://ionicframework.com/docs/demos/api/card/madison.jpg" />
+    <ion-card-header>
       <ion-card-subtitle>{{ride.start}}</ion-card-subtitle>
       <ion-card-title>{{ride.title}}</ion-card-title>
     </ion-card-header>
