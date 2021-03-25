@@ -22,4 +22,16 @@ export class RidesPage implements OnInit {
     this.rides = this.rideService.getAll();
   }
 
+  delete(id) {
+    this.rideService.delete(id).subscribe(
+      (data) => {
+        alert('Se elimino la rodada correctamente');
+        this.getRides();
+      }, 
+      (error) => {
+        alert('No se pudo eliminar la rodada...');
+        console.log(error);
+      }
+    )
+  }
 }

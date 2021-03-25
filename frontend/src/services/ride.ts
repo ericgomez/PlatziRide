@@ -28,4 +28,7 @@ export class RideService {
     return this.http.get(`${this.url}/${id}`) as Observable<Ride>;
   }
 
+  public delete(id) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }
