@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Ride } from "../models/ride";
+import { Ride } from "../models/Ride";
 
 @Injectable()
 export class RideService {

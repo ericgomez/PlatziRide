@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ride } from '../../models/ride';
+import { Ride } from '../../models/Ride';
 import { RideService } from '../../services/ride';
 
 @Component({
@@ -9,9 +9,9 @@ import { RideService } from '../../services/ride';
   styleUrls: ['./rides.page.scss'],
 })
 export class RidesPage implements OnInit {
-  rides: Observable<[Ride]>;
+  rides: Observable<Ride[]>;
   constructor(
-    private rideService: RideService
+    public rideService: RideService
   ) { }
 
   ngOnInit() {
