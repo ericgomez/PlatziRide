@@ -44,8 +44,35 @@ module.exports = {
    * `UserController.login()`
    */
   login: async function (req, res) {
-    return res.json({
-      todo: 'login() is not implemented yet!'
-    });
+    try {
+      const schema = Joi.object().keys({
+        email: Joi
+          .string()
+          .required()
+          .email(),
+        password: Joi.string().required()
+      });
+
+      const {value:{email, password}} = await schema.validate(req.allParams());
+      
+      // Consultamos registros en la DB
+      const user = await User.findOne({email: email});
+
+      if (!user) {
+        return res.notFound();
+      }
+      
+      // Comparacion de contraseñas con bcrypt
+      const  comparedPassword = await bcrypt.compare(password, user.password);
+
+      // Realizamos una condicion
+      return (comparedPassword) ? res.ok(user) : res.badRequest({error: 'Unauthorized'});
+
+    } catch (error) {
+      if (error.name === 'ValidationError') {
+        return res.badRequest({ error }).json();
+      }
+      return res.serverError({ error }).json();
+    }
   }
 };
