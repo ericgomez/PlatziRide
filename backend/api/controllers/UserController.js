@@ -65,8 +65,10 @@ module.exports = {
       // Comparacion de contraseñas con bcrypt
       const  comparedPassword = await bcrypt.compare(password, user.password);
 
+      const token = AuthenticationsService.JWTIssuer({user:user.id}, '1 day');
+
       // Realizamos una condicion
-      return (comparedPassword) ? res.ok(user) : res.badRequest({error: 'Unauthorized'});
+      return (comparedPassword) ? res.ok({token}) : res.badRequest({error: 'Unauthorized'});
 
     } catch (error) {
       if (error.name === 'ValidationError') {
