@@ -15,4 +15,8 @@ export class RideService {
   public getAll(): Observable<[Ride]> {
     return this.http.get(this.url) as Observable<[Ride]>;
   }
+
+  public create(ride: Ride) {
+    return this.http.post(this.url, ride);
+  }
 }
