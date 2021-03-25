@@ -1,6 +1,20 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>rodadas</ion-title>
+
+    <ion-buttons slot="start" color="dark">
+      <ion-button (click)="getRides()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Rodadas</ion-title>
+
+    <ion-buttons slot="end" color="dark">
+      <ion-button routerLink="">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
