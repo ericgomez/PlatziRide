@@ -20,8 +20,13 @@ module.exports = {
           .email(),
         password: Joi.string().required()
       });
-      const params = await schema.validate(req.allParams());
-      return res.ok(params);
+
+      const {value:{email, password}} = await schema.validate(req.allParams());
+
+      // Crear el nodo en la DB por medio del metodo create de sailsjs
+      const user =await User.create({email:email, password:password}).fetch();
+      // Retornamos una respuesta
+      return res.ok(user);
 
     } catch (error) {
       if (error.name === 'ValidationError') {
@@ -39,4 +44,4 @@ module.exports = {
       todo: 'login() is not implemented yet!'
     });
   }
-}
+};
