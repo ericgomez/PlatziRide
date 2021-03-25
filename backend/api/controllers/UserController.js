@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const bcrypt = require('bcrypt');
 
 /**
  * UserController
@@ -22,9 +23,12 @@ module.exports = {
       });
 
       const {value:{email, password}} = await schema.validate(req.allParams());
-
+      
+      // Implementando bcrypt para cifrar contraseña
+      const hashPassword = bcrypt.hashSync(password, 10);
+    
       // Crear el nodo en la DB por medio del metodo create de sailsjs
-      const user =await User.create({email:email, password:password}).fetch();
+      const user = await User.create({email:email, password:hashPassword }).fetch();
       // Retornamos una respuesta
       return res.ok(user);
 
