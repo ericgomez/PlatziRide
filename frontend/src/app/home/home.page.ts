@@ -9,6 +9,7 @@ import { AuthenticationService } from '../../services/authentication';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
+  isLoggingIn = true;
   credential: Credential = DEFAULT_CREDENTIAL_OBJECT;
 
   constructor(
@@ -16,9 +17,34 @@ export class HomePage {
     private navCtrl: NavController,
     ) { }
 
+  public toggleLogin = () => {
+    this.isLoggingIn = !this.isLoggingIn
+  }
+
   login() {
     // Hacer el login o el sigup
-    this.doLogin();
+    if (this.isLoggingIn) {
+      this.doLogin();
+    } else {
+      
+      if (this.credential.password !== this.credential.passwordConfirm) {
+        alert('Tus contraseñas no coincidieron');
+        return;
+      }
+
+      this.authenticationService.signup(this.credential).subscribe( 
+        (data: any) => {
+          console.log(data);
+          // Guardar el token en localStorage
+          this.doLogin();    
+        }, 
+        (error) => {
+          alert('No pudimos autenticarte!');
+          console.log(error);
+          
+        }
+      )
+    }
   }
 
   doLogin() {
