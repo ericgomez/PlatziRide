@@ -21,7 +21,7 @@ module.exports = {
       );
       return res.ok(ride);
     } catch (error) {
-      res.serverError({err});
+      res.serverError({error});
     }
   }
 };

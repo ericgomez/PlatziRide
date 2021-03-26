@@ -33,6 +33,7 @@ module.exports.security = {
     allRoutes: true,
     allowOrigins: '*',
     allowCredentials: false,
+    headers: 'Content-Type, Authorization', // Permite pasar los header en los metodos GET, POST, etc
   },
 
 

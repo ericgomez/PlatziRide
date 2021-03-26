@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Credential } from "../models/Credential";
 
 @Injectable()
 export class AuthenticationService {
