@@ -18,5 +18,12 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  RideController: {
+    '*': 'isLoggedIn',
+
+    // Otros ejemplos:
+    // 'create': 'isLoggedIn',
+    // 'update': 'isLoggedIn',
+  }
 
 };
