@@ -17,7 +17,27 @@
       <ion-label>Fecha de la Salida</ion-label>
       <ion-datetime [(ngModel)]="ride.start" displayFormat="D MMM YYYY H:mm" min="2020" max="2024"></ion-datetime>
     </ion-item>
+
+    <ion-item color="dark">
+      <ion-label>Agregar Parada</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-input type="text" placeholder="Ejemplo: Cd Victoria" [(ngModel)]="masterWayPoints"></ion-input>
+      <ion-button (click)="addWayPoint()" clear item-right>
+        Ok
+      </ion-button>
+    </ion-item>
+
   </ion-list>
+
+  <ion-content color="dark" id="way-points-container">
+    <ion-list>
+      <ion-item color="dark" *ngFor="let wayPoint of wayPoints">
+        <ion-label class="ion-text-wrap">{{ wayPoint }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
   <ion-button (click)="save()" expand="block" class="ion-activable" color="secondary">
     Guardar
   </ion-button>
