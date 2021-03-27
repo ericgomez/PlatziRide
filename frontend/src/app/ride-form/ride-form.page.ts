@@ -48,6 +48,8 @@ export class RideFormPage implements OnInit {
     this.masterWayPoints = '';
     this.ride.wayPoints = this.wayPoints;
     console.log(this.ride);
+
+    this.getDistances();
     
   }
 
@@ -83,7 +85,7 @@ export class RideFormPage implements OnInit {
 
   public getDistances() {
     let thisWayPoints = this.wayPoints.slice(1, -1); // Eliminamos los puntos; inicial y final del arreglo de los puntos
-    thisWayPoints = this.wayPoints.map( (wp) => ({location: wp, stopover: true }));
+    thisWayPoints = thisWayPoints.map( (wp) => ({location: wp, stopover: true }));
 
     if (this.wayPoints.length < 2) {
       return;
@@ -93,7 +95,7 @@ export class RideFormPage implements OnInit {
 
     const request = {
       origin: this.wayPoints[0],
-      wayPoints: thisWayPoints,
+      waypoints: thisWayPoints,
       destination: this.wayPoints[this.wayPoints.length - 1],
       travelMode: 'DRIVING',
       drivingOptions: {
