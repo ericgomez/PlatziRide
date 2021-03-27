@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { WeatherService } from 'src/services/weather';
 import { DEFAULT_RIDE_OBJECT, Ride } from '../../models/Ride';
 import { RideService } from '../../services/ride';
 
@@ -22,7 +23,9 @@ export class RideFormPage implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private rideService: RideService
+    private rideService: RideService,
+    private weatherService: WeatherService
+    
   ) { }
 
   ngOnInit() {
@@ -109,20 +112,34 @@ export class RideFormPage implements OnInit {
       this.legs = result.routes[0].legs;
       this.ride.wayPoints = [];
       this.legs.forEach((leg) => {
-        this.ride.wayPoints.push({
-          start_address: leg.start_address,
-          start_location: {
-            lat: leg.start_location.lat(),
-            lng: leg.start_location.lng(),
-          },
-          end_address: leg.end_address,
-          end_location: {
-            lat: leg.end_location.lat(),
-            lng: leg.end_location.lng(),
-          },
-          distance: leg.distance,
-          duration: leg.duration,
-        })
+
+        const start_location = {
+          lat: leg.start_location.lat(),
+          lng: leg.start_location.lng(),
+        };
+        const end_location = {
+          lat: leg.end_location.lat(),
+          lng: leg.end_location.lng(),
+        };
+
+        this.weatherService.getWeather(start_location).subscribe(
+          (data: any) => {
+            console.log(data.main);
+            this.ride.wayPoints.push({
+              start_address: leg.start_address,
+              start_location: start_location,
+              end_address: leg.end_address,
+              end_location: end_location,
+              distance: leg.distance,
+              duration: leg.duration,
+              weather: data.main,
+            })
+          }, 
+          (error) => {
+            alert('Ocurrió un error obteniendo el clima');
+            console.log(error);            
+          }
+        )
       })
       console.log(this.ride);
       
