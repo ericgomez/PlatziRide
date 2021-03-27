@@ -35,6 +35,20 @@
         <ion-icon slot="start" name="trash"></ion-icon>
         <ion-label>Eliminar</ion-label>
       </ion-item>
+
+      <ion-list>
+        <ion-item *ngFor="let leg of ride.wayPoints">
+          <ion-label color="dark">
+            <b>{{ leg.start_address}} ➡️ {{ leg.end_address}}  </b>
+            <p>{{ leg.distance.text}} | {{ leg.duration.text}}</p>
+            <p>
+              Actual <b>{{leg.weather.temp}}°C</b>
+              Min <b>{{leg.weather.temp_min}}°C</b>
+              Max <b>{{leg.weather.temp_max}}°C</b>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
