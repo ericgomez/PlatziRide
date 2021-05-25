@@ -1,7 +1,9 @@
-# PlatziRide
+# Curso de Desarrollo de APIs con Sails.js
 
 ### Proyecto del curso
-#### PlatziRide
+![Proyect](https://static.platzi.com/media/landing-projects/proyecto_sail-js.gif)
+
+## PlatziRide
 Con esta App, los motociclistas pueden planear sus rutas. Les permite obtener detalles como el tiempo, la distancia y las condiciones climáticas de sus recorridos.
 
 ## Comenzando 🚀
